@@ -12,8 +12,8 @@ public class AppProperties {
 
     public static final Long COLLECTOR_CHAT_ID = -1002665158076L;
 
-    public static final String BAG = "src/main/bag";
-    public static final String SKETCH = "src/main/sketch";
+    public static final String BAG = "./src/main/bag";
+    public static final String SKETCH = "./src/main/sketch";
 
     public static final int NUMBER_PHOTO_IN_GROUP = 2;
     public static final int NUMBER_BUTTON_IN_ROW = 2;

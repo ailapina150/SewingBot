@@ -28,6 +28,10 @@ public class ButtonsCreator {
     public static InlineKeyboardMarkup createButton(List<String> buttonsName) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+        if(buttonsName.isEmpty()){
+            inlineKeyboardMarkup.setKeyboard(rowsInLine);
+            return inlineKeyboardMarkup;
+        }
         List<InlineKeyboardButton> rowInline = new ArrayList<>();
         buttonsName.forEach(s -> {
             var button = new InlineKeyboardButton();

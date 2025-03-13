@@ -10,13 +10,10 @@ import java.util.stream.Collectors;
 
 public class FileLoader {
 
-    public static String getFileName(String fileName) {
-        return "./" + fileName;
-    }
-
     public static List<String> getFilesNames(String path) {
+        if(path==null)return null;
         try {
-            return Files.walk(Paths.get(getFileName(path)))
+            return Files.walk(Paths.get(path))
                     .filter(Files::isRegularFile)
                     .map(Path::toString)
                     .collect(Collectors.toList());
@@ -27,16 +24,19 @@ public class FileLoader {
     }
 
     public static List<List<String>> getFilesNamesGroup(String path) {
-        List<String> filesNames = Objects.requireNonNull(getFilesNames(path)).stream()
-                .toList();
+        List<String> filesNames = Objects.requireNonNull(getFilesNames(path)).stream().toList();
         return makeListOfList(filesNames, AppProperties.NUMBER_PHOTO_IN_GROUP, true);
     }
 
-
     public static String getSingleName(String fullName) {
         if (fullName == null) return "";
-        return fullName.substring(fullName.lastIndexOf("\\") + 1, fullName.lastIndexOf("."))
-                .substring(fullName.lastIndexOf("/") + 1);
+        int beginIndex = Math.max(fullName.lastIndexOf("\\") + 1, fullName.lastIndexOf("/") + 1);
+        int endIndex = fullName.lastIndexOf(".");
+        if(endIndex>beginIndex) {
+            return fullName.substring(beginIndex, fullName.lastIndexOf("."));
+        }else{
+            return fullName.substring(beginIndex);
+        }
     }
 
     public static List<String> getAllSingleNames(List<String> fullNames) {
