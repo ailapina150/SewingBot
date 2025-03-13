@@ -26,7 +26,7 @@ class FileLoaderTest {
         assertTrue(fileNames.contains(file2.toString()));
     }
     @Test
-    void getFilesNames_validPathWithNoFiles_returnsEmptyList() throws IOException {
+    void getFilesNames_validPathWithNoFiles_returnsEmptyList() {
         List<String> fileNames =  FileLoader.getFilesNames(tempDir.toString());
         assertNotNull(fileNames);
         assertTrue(fileNames.isEmpty());

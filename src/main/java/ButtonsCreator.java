@@ -1,12 +1,13 @@
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonsCreator {
 
-    public static InlineKeyboardMarkup createButtonRows(List<List<String>> buttonsName) {
+    public static InlineKeyboardMarkup createButtonRows(@NotNull List<List<String>> buttonsName) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         for (List<String> stringList : buttonsName) {
@@ -25,7 +26,7 @@ public class ButtonsCreator {
         return inlineKeyboardMarkup;
     }
 
-    public static InlineKeyboardMarkup createButton(List<String> buttonsName) {
+    public static InlineKeyboardMarkup createButton(@NotNull List<String> buttonsName) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         if(buttonsName.isEmpty()){

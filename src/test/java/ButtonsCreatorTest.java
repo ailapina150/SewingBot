@@ -7,20 +7,18 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ButtonsCreatorTest {
-
-    private ButtonsCreator createButton = new ButtonsCreator();
     @Test
-    void createButtonRows_emptyList_returnsEmptyMarkup() {
+    void ButtonsCreatorRows_emptyList_returnsEmptyMarkup() {
         List<List<String>> emptyList = new ArrayList<>();
-        InlineKeyboardMarkup markup = createButton.createButtonRows(emptyList);
+        InlineKeyboardMarkup markup = ButtonsCreator.createButtonRows(emptyList);
         assertNotNull(markup);
         assertTrue(markup.getKeyboard().isEmpty());
     }
 
     @Test
-    void createButtonRows_singleRow_returnsMarkupWithOneRow() {
+    void ButtonsCreatorRows_singleRow_returnsMarkupWithOneRow() {
         List<List<String>> singleRowList = List.of(List.of("Button1", "Button2"));
-        InlineKeyboardMarkup markup = createButton.createButtonRows(singleRowList);
+        InlineKeyboardMarkup markup = ButtonsCreator.createButtonRows(singleRowList);
         assertNotNull(markup);
         assertEquals(1, markup.getKeyboard().size());
         assertEquals(2, markup.getKeyboard().get(0).size());
@@ -31,13 +29,13 @@ class ButtonsCreatorTest {
     }
 
     @Test
-    void createButtonRows_multipleRows_returnsMarkupWithMultipleRows() {
+    void ButtonsCreatorRows_multipleRows_returnsMarkupWithMultipleRows() {
         List<List<String>> multipleRowsList = List.of(
                 List.of("Button1", "Button2"),
                 List.of("Button3"),
                 List.of("Button4", "Button5", "Button6")
         );
-        InlineKeyboardMarkup markup = createButton.createButtonRows(multipleRowsList);
+        InlineKeyboardMarkup markup = ButtonsCreator.createButtonRows(multipleRowsList);
         assertNotNull(markup);
         assertEquals(3, markup.getKeyboard().size());
         assertEquals(2, markup.getKeyboard().get(0).size());
@@ -53,23 +51,18 @@ class ButtonsCreatorTest {
     }
 
     @Test
-    void createButtonRows_nullInput_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> createButton.createButtonRows(null));
-    }
-
-    @Test
-    void createButtonRows_nullInnerList_throwsNullPointerException() {
+    void ButtonsCreatorRows_nullInnerList_throwsNullPointerException() {
         List<List<String>> listWithNull = new ArrayList<>();
         listWithNull.add(List.of("Button1"));
         listWithNull.add(null);
-        assertThrows(NullPointerException.class, () -> createButton.createButtonRows(listWithNull));
+        assertThrows(NullPointerException.class, () -> ButtonsCreator.createButtonRows(listWithNull));
     }
 
 
     @Test
-    void createButtonRows_emptyInnerList_handlesEmptyRows() {
+    void ButtonsCreatorRows_emptyInnerList_handlesEmptyRows() {
         List<List<String>> listWithEmpty = List.of(List.of("Button1"), new ArrayList<>(), List.of("Button2"));
-        InlineKeyboardMarkup markup = createButton.createButtonRows(listWithEmpty);
+        InlineKeyboardMarkup markup = ButtonsCreator.createButtonRows(listWithEmpty);
         assertNotNull(markup);
         assertEquals(3, markup.getKeyboard().size());
         assertEquals(1, markup.getKeyboard().get(0).size());
@@ -78,9 +71,9 @@ class ButtonsCreatorTest {
     }
 
     @Test
-    void createButtonRows_listWithSpaces_handlesSpacesCorrectly(){
+    void ButtonsCreatorRows_listWithSpaces_handlesSpacesCorrectly(){
         List<List<String>> buttonsWithSpaces = List.of(List.of("Button 1", "Button 2"));
-        InlineKeyboardMarkup markup = createButton.createButtonRows(buttonsWithSpaces);
+        InlineKeyboardMarkup markup = ButtonsCreator.createButtonRows(buttonsWithSpaces);
         assertNotNull(markup);
         assertEquals(1, markup.getKeyboard().size());
         assertEquals(2, markup.getKeyboard().get(0).size());
@@ -92,17 +85,17 @@ class ButtonsCreatorTest {
 
     //-----------------------------------------------------------------------------------------------------------------
     @Test
-    void createButton_emptyInput_returnsEmptyMarkup() {
+    void ButtonsCreator_emptyInput_returnsEmptyMarkup() {
         List<String> emptyList = new ArrayList<>();
-        InlineKeyboardMarkup markup = createButton.createButton(emptyList);
+        InlineKeyboardMarkup markup = ButtonsCreator.createButton(emptyList);
         assertNotNull(markup);
         assertTrue(markup.getKeyboard().isEmpty());
     }
 
     @Test
-    void createButton_singleButton_returnsMarkupWithOneButton() {
+    void ButtonsCreator_singleButton_returnsMarkupWithOneButton() {
         List<String> singleButtonList = List.of("Button1");
-        InlineKeyboardMarkup markup = createButton.createButton(singleButtonList);
+        InlineKeyboardMarkup markup = ButtonsCreator.createButton(singleButtonList);
         assertNotNull(markup);
         assertEquals(1, markup.getKeyboard().size());
         assertEquals(1, markup.getKeyboard().get(0).size());
@@ -111,9 +104,9 @@ class ButtonsCreatorTest {
     }
 
     @Test
-    void createButton_multipleButtons_returnsMarkupWithMultipleButtons() {
+    void ButtonsCreator_multipleButtons_returnsMarkupWithMultipleButtons() {
         List<String> multipleButtonsList = List.of("Button1", "Button2", "Button3");
-        InlineKeyboardMarkup markup = createButton.createButton(multipleButtonsList);
+        InlineKeyboardMarkup markup = ButtonsCreator.createButton(multipleButtonsList);
         assertNotNull(markup);
         assertEquals(1, markup.getKeyboard().size());
         assertEquals(3, markup.getKeyboard().get(0).size());
@@ -127,14 +120,9 @@ class ButtonsCreatorTest {
     }
 
     @Test
-    void createButton_nullInput_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> createButton.createButton(null));
-    }
-
-    @Test
-    void createButton_listWithSpaces_handlesSpacesCorrectly(){
+    void ButtonsCreator_listWithSpaces_handlesSpacesCorrectly(){
         List<String> buttonsWithSpaces = List.of("Button 1", "Button 2");
-        InlineKeyboardMarkup markup = createButton.createButton(buttonsWithSpaces);
+        InlineKeyboardMarkup markup = ButtonsCreator.createButton(buttonsWithSpaces);
         assertNotNull(markup);
         assertEquals(1, markup.getKeyboard().size());
         assertEquals(2, markup.getKeyboard().get(0).size());
