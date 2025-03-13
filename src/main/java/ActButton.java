@@ -1,5 +1,10 @@
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
+@AllArgsConstructor
 public enum ActButton {
     START("Перезапустить", "Перезапустить", "/start"),
     ORDER("Каталог изделий", "Выберите издения", "/catalog"),
@@ -12,24 +17,6 @@ public enum ActButton {
     private final String name;
     private final String replay;
     private final String command;
-
-    ActButton(String name, String replay, String command) {
-        this.name = name;
-        this.replay = replay;
-        this.command = command;
-    }
-
-    public String getReplay() {
-        return replay;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCommand() {
-        return command;
-    }
 
     public static List<String> getStartButton() {
         return List.of(ActButton.INTERESTING.getName(),

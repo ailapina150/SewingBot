@@ -1,3 +1,10 @@
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class BotUser {
     private final Long userId;
     private String userName;
@@ -11,38 +18,4 @@ public class BotUser {
         this.modelName = "";
     }
 
-    public BotUser(Long userId) {
-        this.userId = userId;
-        this.userName = "";
-        this.firstName = "";
-        this.modelName = "";
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getModelName() {
-        return modelName;
-    }
 }
