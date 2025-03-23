@@ -1,4 +1,6 @@
 
+import lombok.extern.log4j.Log4j;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,28 +10,36 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Log4j
 public class FileLoader {
 
     public static List<String> getFilesNames(String path) {
-        if(path==null)return null;
+        if(path == null){
+            log.warn("getFilesNames has path =  nul");
+            return null;
+        }
         try {
             return Files.walk(Paths.get(path))
                     .filter(Files::isRegularFile)
                     .map(Path::toString)
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            e.getStackTrace();
+            log.debug("IOException " + e.getMessage());
             return null;
         }
     }
 
     public static List<List<String>> getFilesNamesGroup(String path) {
         List<String> filesNames = Objects.requireNonNull(getFilesNames(path)).stream().toList();
+        if(filesNames.isEmpty()) log.warn("FilesNamesGroup is empty");
         return makeListOfList(filesNames, AppProperties.NUMBER_PHOTO_IN_GROUP, true);
     }
 
     public static String getSingleName(String fullName) {
-        if (fullName == null) return "";
+        if (fullName == null){
+            log.warn("fullName is null");
+            return "";
+        }
         int beginIndex = Math.max(fullName.lastIndexOf("\\") + 1, fullName.lastIndexOf("/") + 1);
         int endIndex = fullName.lastIndexOf(".");
         if(endIndex>beginIndex) {

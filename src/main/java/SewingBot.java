@@ -1,3 +1,4 @@
+import lombok.extern.log4j.Log4j;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Log4j
 public class SewingBot extends TelegramSender{
     private final Map<Long, BotUser> botUsers;
 
@@ -35,7 +37,9 @@ public class SewingBot extends TelegramSender{
         long chatId = getChatId(update);
         Message message = getMessage(update);
         String text = message.hasText() ? message.getText() : "";
+        log.debug("text = " + text);
         String buttonData = getButtonData(update);
+        log.debug("buttonData = " + buttonData);
 
         usersIdCollector(chatId, message);
         BotUser botUser = botUsers.get(chatId);
@@ -117,6 +121,7 @@ public class SewingBot extends TelegramSender{
             for(String name : names) {
                 if( FileLoader.getSingleName(name).equals(buttonData)){
                     sendPhoto(chatId, name, FileLoader.getSingleName(name));
+                    log.debug("name = " + name);
                     botUser.setModelName(FileLoader.getSingleName(name));
                     return true;
                 }
