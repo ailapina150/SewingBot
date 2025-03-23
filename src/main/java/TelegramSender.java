@@ -1,3 +1,4 @@
+import lombok.extern.log4j.Log4j;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMediaGroup;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Log4j
 public abstract class TelegramSender extends TelegramLongPollingBot {
 
     @Override
@@ -63,7 +65,7 @@ public abstract class TelegramSender extends TelegramLongPollingBot {
         try {
            execute(reply);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
+           log.error("TelegramApiException " + e.getMessage());
         }
     }
 
@@ -78,7 +80,7 @@ public abstract class TelegramSender extends TelegramLongPollingBot {
         try {
             execute(reply);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
+           log.error("TelegramApiException " + e.getMessage());
         }
     }
 
@@ -90,7 +92,7 @@ public abstract class TelegramSender extends TelegramLongPollingBot {
             sendPhoto.setCaption(caption);
             execute(sendPhoto);
         } catch (FileNotFoundException | TelegramApiException e) {
-            e.printStackTrace();
+            log.error("Exception " + e.getMessage());
         }
     }
 
@@ -105,7 +107,7 @@ public abstract class TelegramSender extends TelegramLongPollingBot {
             }
             execute(sendPhoto);
         } catch (IOException | TelegramApiException e) {
-            e.printStackTrace();
+            log.error("TelegramApiException " + e.getMessage());
         }
     }
 
@@ -124,8 +126,7 @@ public abstract class TelegramSender extends TelegramLongPollingBot {
                 execute(sendDocument);
 
             } catch (TelegramApiException e) {
-                System.err.println("Error sending document: " + e.getMessage());
-                e.printStackTrace();
+                log.error("TelegramApiException. Error sending document " + e.getMessage());
             }
         }
 
@@ -145,7 +146,7 @@ public abstract class TelegramSender extends TelegramLongPollingBot {
         try {
              execute(sendMediaGroup);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
+           log.error("TelegramApiException " + e.getMessage());
         }
     }
 
