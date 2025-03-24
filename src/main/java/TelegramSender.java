@@ -142,7 +142,9 @@ public abstract class TelegramSender extends TelegramLongPollingBot {
             inputMedia.setCaption(FileLoader.getSingleName(fileName));
             inputMediaList.add(inputMedia);
         }
+
         sendMediaGroup.setMedias(inputMediaList);
+
         try {
              execute(sendMediaGroup);
         } catch (TelegramApiException e) {
